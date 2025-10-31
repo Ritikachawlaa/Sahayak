@@ -1,0 +1,7 @@
+django
+djangorestframework
+django-cors-headers
+pandas==2.1.4
+scikit-learn
+requests
+beautifulsoup4

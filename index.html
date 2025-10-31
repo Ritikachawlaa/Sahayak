@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahayak - AI Internship Assistant</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons for visual cues -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind's gray-50 */
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+        input[type="checkbox"]:checked + label {
+            border-color: #3b82f6; /* blue-500 */
+            background-color: #eff6ff; /* blue-50 */
+            color: #2563eb; /* blue-600 */
+        }
+        input[type="checkbox"]:checked + label i {
+            color: #2563eb; /* blue-600 */
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-6 md:p-8">
+
+        <!-- Header Section -->
+        <header class="text-center mb-8">
+            <div class="flex items-center justify-center gap-3 mb-2">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="#3b82f6" viewBox="0 0 256 256"><path d="M224,128a96,96,0,1,1-96-96A96,96,0,0,1,224,128Z" opacity="0.2"></path><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-88a40,40,0,1,1-40-40A40,40,0,0,1,168,128Z" opacity="0.2"></path><path d="M128,32a96,96,0,1,0,96,96A96.11,96.11,0,0,0,128,32Zm0,176a80,80,0,1,1,80-80A80.09,80.09,0,0,1,128,208Zm0-96a32,32,0,1,0-32-32A32,32,0,0,0,128,112Zm0,16a16,16,0,1,1,16-16A16,16,0,0,1,128,128ZM197.66,186.34l-24-24a8,8,0,0,0-11.32,11.32l24,24a8,8,0,0,0,11.32-11.32Z"></path></svg>
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">Sahayak</h1>
+            </div>
+            <p class="text-lg text-gray-600">Your Smart Internship Assistant</p>
+        </header>
+
+        <!-- Main Form -->
+        <main class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+            <form id="recommendation-form">
+                <!-- Step 1: Education -->
+                 <div class="mb-8">
+                    <label for="education" class="block text-lg font-semibold text-gray-700 mb-2">1. What is your educational background?</label>
+                    <p class="text-sm text-gray-500 mb-3">e.g., B.A. History, B.Tech Computer Science, 12th Pass Commerce.</p>
+                    <input type="text" id="education" name="education" placeholder="e.g., B.Tech Computer Science" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow">
+                </div>
+
+                <!-- Step 2: Skills -->
+                <div class="mb-8">
+                    <label for="skills" class="block text-lg font-semibold text-gray-700 mb-2">2. What are your skills?</label>
+                    <p class="text-sm text-gray-500 mb-3">Enter skills separated by commas (e.g., Python, Tally, Content Writing).</p>
+                    <input type="text" id="skills" name="skills" placeholder="e.g., Java, SQL, Accounting" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow">
+                </div>
+
+                <!-- Step 3: Interests -->
+                <div class="mb-8">
+                    <label class="block text-lg font-semibold text-gray-700 mb-2">3. What sectors interest you?</label>
+                    <p class="text-sm text-gray-500 mb-3">Choose one or more.</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        <!-- Interest Options -->
+                        <div class="relative"><input type="checkbox" id="interest-it" value="IT" class="hidden peer"><label for="interest-it" class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><i class="ph-bold ph-code text-3xl mb-1 text-gray-500"></i><span class="text-sm font-medium">IT</span></label></div>
+                        <div class="relative"><input type="checkbox" id="interest-ds" value="Data Science" class="hidden peer"><label for="interest-ds" class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><i class="ph-bold ph-chart-bar text-3xl mb-1 text-gray-500"></i><span class="text-sm font-medium">Data Science</span></label></div>
+                        <div class="relative"><input type="checkbox" id="interest-mkt" value="Marketing" class="hidden peer"><label for="interest-mkt" class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><i class="ph-bold ph-megaphone text-3xl mb-1 text-gray-500"></i><span class="text-sm font-medium">Marketing</span></label></div>
+                        <div class="relative"><input type="checkbox" id="interest-fin" value="Finance" class="hidden peer"><label for="interest-fin" class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><i class="ph-bold ph-bank text-3xl mb-1 text-gray-500"></i><span class="text-sm font-medium">Finance</span></label></div>
+                        <div class="relative"><input type="checkbox" id="interest-sw" value="Social Work" class="hidden peer"><label for="interest-sw" class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><i class="ph-bold ph-users-three text-3xl mb-1 text-gray-500"></i><span class="text-sm font-medium">Social Work</span></label></div>
+                        <div class="relative"><input type="checkbox" id="interest-med" value="Media" class="hidden peer"><label for="interest-med" class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><i class="ph-bold ph-pencil-line text-3xl mb-1 text-gray-500"></i><span class="text-sm font-medium">Media</span></label></div>
+                        <div class="relative"><input type="checkbox" id="interest-des" value="Design" class="hidden peer"><label for="interest-des" class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><i class="ph-bold ph-paint-brush text-3xl mb-1 text-gray-500"></i><span class="text-sm font-medium">Design</span></label></div>
+                        <div class="relative"><input type="checkbox" id="interest-ops" value="Operations" class="hidden peer"><label for="interest-ops" class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><i class="ph-bold ph-package text-3xl mb-1 text-gray-500"></i><span class="text-sm font-medium">Operations</span></label></div>
+                        <div class="relative"><input type="checkbox" id="interest-policy" value="Policy" class="hidden peer"><label for="interest-policy" class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><i class="ph-bold ph-scales text-3xl mb-1 text-gray-500"></i><span class="text-sm font-medium">Policy</span></label></div>
+                        <div class="relative"><input type="checkbox" id="interest-agri" value="Agriculture" class="hidden peer"><label for="interest-agri" class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><i class="ph-bold ph-tree text-3xl mb-1 text-gray-500"></i><span class="text-sm font-medium">Agriculture</span></label></div>
+                        <div class="relative"><input type="checkbox" id="interest-health" value="Healthcare" class="hidden peer"><label for="interest-health" class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><i class="ph-bold ph-heartbeat text-3xl mb-1 text-gray-500"></i><span class="text-sm font-medium">Healthcare</span></label></div>
+                        <div class="relative"><input type="checkbox" id="interest-edu" value="Education" class="hidden peer"><label for="interest-edu" class="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><i class="ph-bold ph-student text-3xl mb-1 text-gray-500"></i><span class="text-sm font-medium">Education</span></label></div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Location Preference -->
+                <div class="mb-8">
+                     <label class="block text-lg font-semibold text-gray-700 mb-2">4. Where would you like to work?</label>
+                    <p class="text-sm text-gray-500 mb-3">Choose your preferred locations.</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        <!-- Location Options -->
+                        <div class="relative"><input type="checkbox" id="loc-blr" value="Bangalore" class="hidden peer"><label for="loc-blr" class="flex items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><span class="text-sm font-medium">Bangalore</span></label></div>
+                        <div class="relative"><input type="checkbox" id="loc-mum" value="Mumbai" class="hidden peer"><label for="loc-mum" class="flex items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><span class="text-sm font-medium">Mumbai</span></label></div>
+                        <div class="relative"><input type="checkbox" id="loc-del" value="Delhi" class="hidden peer"><label for="loc-del" class="flex items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><span class="text-sm font-medium">Delhi</span></label></div>
+                        <div class="relative"><input type="checkbox" id="loc-hyd" value="Hyderabad" class="hidden peer"><label for="loc-hyd" class="flex items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><span class="text-sm font-medium">Hyderabad</span></label></div>
+                        <div class="relative"><input type="checkbox" id="loc-pune" value="Pune" class="hidden peer"><label for="loc-pune" class="flex items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><span class="text-sm font-medium">Pune</span></label></div>
+                        <div class="relative"><input type="checkbox" id="loc-bho" value="Bhopal" class="hidden peer"><label for="loc-bho" class="flex items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><span class="text-sm font-medium">Bhopal</span></label></div>
+                        <div class="relative"><input type="checkbox" id="loc-ran" value="Ranchi" class="hidden peer"><label for="loc-ran" class="flex items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><span class="text-sm font-medium">Ranchi</span></label></div>
+                        <div class="relative"><input type="checkbox" id="loc-ahm" value="Ahmedabad" class="hidden peer"><label for="loc-ahm" class="flex items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><span class="text-sm font-medium">Ahmedabad</span></label></div>
+                        <div class="relative"><input type="checkbox" id="loc-kol" value="Kolkata" class="hidden peer"><label for="loc-kol" class="flex items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><span class="text-sm font-medium">Kolkata</span></label></div>
+                        <div class="relative"><input type="checkbox" id="loc-che" value="Chennai" class="hidden peer"><label for="loc-che" class="flex items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><span class="text-sm font-medium">Chennai</span></label></div>
+                        <div class="relative"><input type="checkbox" id="loc-jai" value="Jaipur" class="hidden peer"><label for="loc-jai" class="flex items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><span class="text-sm font-medium">Jaipur</span></label></div>
+                        <div class="relative"><input type="checkbox" id="loc-luc" value="Lucknow" class="hidden peer"><label for="loc-luc" class="flex items-center justify-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"><span class="text-sm font-medium">Lucknow</span></label></div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-10 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-md hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300">
+                        Find My Internships
+                    </button>
+                </div>
+            </form>
+        </main>
+
+        <!-- Results Section -->
+        <section id="results-section" class="mt-10 hidden">
+             <div id="loading-spinner" class="text-center hidden my-8">
+                <div class="inline-block w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full spinner"></div>
+                <p class="mt-3 text-gray-600 font-medium">Finding the best matches for you...</p>
+            </div>
+            <div id="results-container">
+                <!-- Recommendation cards will be injected here by JavaScript -->
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const form = document.getElementById('recommendation-form');
+        const resultsSection = document.getElementById('results-section');
+        const resultsContainer = document.getElementById('results-container');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        
+        // This is the URL of your Django backend API
+        const API_URL = 'http://127.0.0.1:8000/api/recommend/';
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Show spinner and clear previous results
+            resultsSection.classList.remove('hidden');
+            loadingSpinner.classList.remove('hidden');
+            resultsContainer.innerHTML = '';
+
+            // 1. Gather user input from the form
+            const education = document.getElementById('education').value.trim();
+            const skills = document.getElementById('skills').value.split(',').map(s => s.trim()).filter(Boolean);
+            const interests = Array.from(document.querySelectorAll('input[id^="interest-"]:checked')).map(el => el.value);
+            const locations = Array.from(document.querySelectorAll('input[id^="loc-"]:checked')).map(el => el.value);
+            
+            // Basic validation
+            if (!education || (skills.length === 0 && interests.length === 0) || locations.length === 0) {
+                alert("Please fill out all fields: education, at least one skill or interest, and at least one location.");
+                loadingSpinner.classList.add('hidden');
+                return;
+            }
+
+            const candidateProfile = {
+                education: education,
+                skills: skills,
+                interests: interests,
+                location_preference: locations
+            };
+
+            // 2. Send the data to the Django Backend API
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(candidateProfile),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const recommendations = await response.json();
+                
+                // 3. Display results
+                loadingSpinner.classList.add('hidden');
+                displayRecommendations(recommendations, candidateProfile);
+
+            } catch (error) {
+                console.error("Error fetching recommendations:", error);
+                loadingSpinner.classList.add('hidden');
+                displayError();
+            }
+
+            // Scroll to the results section
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function displayRecommendations(recs, profile) {
+            if (!recs || recs.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="text-center bg-white p-8 rounded-lg shadow-md">
+                        <i class="ph-bold ph-magnifying-glass text-5xl text-gray-400 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800">No strong matches found</h3>
+                        <p class="text-gray-600 mt-2">Try adding more skills or selecting different interests to broaden your search.</p>
+                    </div>`;
+                return;
+            }
+
+            const header = `<h2 class="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-6">Top ${recs.length} Recommendations For You</h2>`;
+            const cards = recs.map(rec => createCard(rec, profile)).join('');
+            resultsContainer.innerHTML = header + `<div class="grid grid-cols-1 md:grid-cols-2 gap-6">${cards}</div>`;
+        }
+        
+        function displayError() {
+             resultsContainer.innerHTML = `
+                <div class="text-center bg-red-50 text-red-700 p-8 rounded-lg shadow-md border border-red-200">
+                    <i class="ph-bold ph-x-circle text-5xl mb-4"></i>
+                    <h3 class="text-xl font-bold">Could Not Connect to Server</h3>
+                    <p class="mt-2">Please make sure your Django backend server is running and that you have run the scraper to get the internship data.</p>
+                </div>`;
+        }
+
+        function createCard(rec, profile) {
+            // "Explainable AI" feature: Find a matching keyword
+            let reason = '';
+            const profileTokens = new Set([...profile.skills.map(s => s.toLowerCase()), ...profile.interests.map(s => s.toLowerCase())]);
+            const titleTokens = new Set(rec.title.toLowerCase().split(' '));
+            
+            // Find the first matching token between profile and title
+            const intersection = [...profileTokens].find(token => titleTokens.has(token));
+
+            if (intersection) {
+                reason = `Matches your skill/interest in <span class="font-semibold capitalize">${intersection}</span>.`;
+            } else if (profile.interests.map(i => i.toLowerCase()).includes(rec.sector.toLowerCase())) {
+                reason = `Matches your interest in the <span class="font-semibold">${rec.sector}</span> sector.`;
+            }
+
+            return `
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 border border-gray-200 flex flex-col justify-between">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                             <div class="tracking-wide text-sm text-blue-600 font-bold">${rec.sector}</div>
+                             <div class="text-xs font-semibold px-2.5 py-1 bg-green-100 text-green-800 rounded-full">Match: ${Math.round(rec.similarity_score * 100)}%</div>
+                        </div>
+                        <h3 class="block mt-1 text-xl leading-tight font-bold text-black">${rec.title}</h3>
+                        <p class="mt-2 text-gray-500 text-sm flex items-center gap-1.5">
+                           <i class="ph-bold ph-map-pin"></i> ${rec.location}
+                        </p>
+                        <p class="mt-4 text-gray-700 text-base line-clamp-3">${rec.description}</p>
+                         ${reason ? `
+                         <div class="mt-4 bg-blue-50 border-l-4 border-blue-400 p-3 rounded-r-lg">
+                            <p class="text-sm text-blue-800"><i class="ph-bold ph-sparkle mr-1"></i> ${reason}</p>
+                        </div>
+                        ` : ''}
+                    </div>
+                     <div class="px-6 pb-4 mt-auto">
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors" onclick="window.open('https://internship.aicte-india.org/', '_blank')">
+                            View & Apply
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+
+</body>
+</html>
+
